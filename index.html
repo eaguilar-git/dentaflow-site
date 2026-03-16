@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DentaFlow — Software de Gestión para Clínicas Dentales</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --teal:#0a7c6e; --teal-light:#12a391; --teal-pale:#e6f5f3;
+    --cream:#f9f6f1; --ink:#1a1a1a; --ink-soft:#444; --ink-muted:#777;
+    --gold:#c8a84b; --white:#ffffff;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family:'DM Sans',sans-serif; background:var(--cream); color:var(--ink); overflow-x:hidden; }
+
+  /* HERO */
+  .hero { min-height:100vh; background:var(--teal); display:grid; grid-template-columns:1fr 1fr; position:relative; overflow:hidden; }
+  .hero::before { content:''; position:absolute; inset:0;
+    background: radial-gradient(ellipse 60% 80% at 70% 50%,rgba(18,163,145,.25) 0%,transparent 70%),
+                radial-gradient(ellipse 40% 60% at 10% 80%,rgba(0,0,0,.2) 0%,transparent 60%); }
+  .hero-left { padding:80px 60px 80px 80px; display:flex; flex-direction:column; justify-content:center; position:relative; z-index:2; }
+  .logo-mark { display:flex; align-items:center; gap:12px; margin-bottom:60px; }
+  .logo-icon { width:44px; height:44px; background:var(--gold); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:20px; }
+  .logo-name { font-family:'Playfair Display',serif; font-size:1.5rem; color:white; letter-spacing:.05em; }
+  .hero-eyebrow { font-size:.75rem; font-weight:600; letter-spacing:.15em; text-transform:uppercase; color:var(--gold); margin-bottom:20px; }
+  .hero-title { font-family:'Playfair Display',serif; font-size:clamp(2.8rem,5vw,4.2rem); font-weight:900; color:white; line-height:1.05; margin-bottom:28px; }
+  .hero-title em { font-style:italic; color:var(--gold); }
+  .hero-sub { font-size:1.1rem; color:rgba(255,255,255,.75); line-height:1.7; max-width:420px; margin-bottom:48px; }
+  .cta-group { display:flex; gap:16px; flex-wrap:wrap; }
+  .btn-primary { background:var(--gold); color:var(--ink); padding:16px 36px; border-radius:50px; font-weight:600; font-size:.95rem; text-decoration:none; letter-spacing:.02em; transition:transform .2s,box-shadow .2s; display:inline-block; }
+  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(200,168,75,.4); }
+  .btn-ghost { border:1.5px solid rgba(255,255,255,.4); color:white; padding:16px 36px; border-radius:50px; font-weight:500; font-size:.95rem; text-decoration:none; transition:background .2s,border-color .2s; display:inline-block; }
+  .btn-ghost:hover { background:rgba(255,255,255,.1); border-color:white; }
+  .hero-right { display:flex; align-items:center; justify-content:center; padding:60px 80px 60px 20px; position:relative; z-index:2; }
+  .hero-mockup { background:rgba(255,255,255,.06); backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,.15); border-radius:20px; padding:28px; width:100%; max-width:400px; box-shadow:0 40px 80px rgba(0,0,0,.3); }
+  .mockup-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; }
+  .mockup-title { color:rgba(255,255,255,.6); font-size:.75rem; text-transform:uppercase; letter-spacing:.1em; }
+  .mockup-badge { background:rgba(18,163,145,.3); color:#7ee8da; font-size:.7rem; padding:4px 10px; border-radius:20px; font-weight:600; }
+  .stat-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:20px; }
+  .stat-card { background:rgba(255,255,255,.08); border-radius:12px; padding:16px; }
+  .stat-label { font-size:.7rem; color:rgba(255,255,255,.5); text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px; }
+  .stat-value { font-family:'Playfair Display',serif; font-size:1.5rem; color:white; font-weight:700; }
+  .stat-value.green { color:#7ee8da; } .stat-value.gold { color:var(--gold); }
+  .bar-chart { background:rgba(255,255,255,.05); border-radius:12px; padding:16px; }
+  .bar-label { font-size:.7rem; color:rgba(255,255,255,.5); margin-bottom:12px; text-transform:uppercase; letter-spacing:.08em; }
+  .bars { display:flex; align-items:flex-end; gap:8px; height:60px; }
+  .bar { flex:1; border-radius:4px 4px 0 0; background:rgba(18,163,145,.4); }
+  .bar.active { background:var(--teal-light); } .bar.gold { background:rgba(200,168,75,.5); }
+
+  /* COMMON */
+  section { padding:100px 80px; }
+  .section-eyebrow { font-size:.72rem; font-weight:600; letter-spacing:.15em; text-transform:uppercase; color:var(--teal); margin-bottom:16px; }
+  .section-title { font-family:'Playfair Display',serif; font-size:clamp(2rem,3.5vw,3rem); font-weight:900; color:var(--ink); line-height:1.1; margin-bottom:20px; }
+  .section-sub { font-size:1rem; color:var(--ink-soft); line-height:1.7; max-width:520px; }
+
+  /* PROBLEM */
+  .problem { background:var(--ink); color:white; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+  .problem .section-title { color:white; }
+  .problem .section-sub { color:rgba(255,255,255,.6); max-width:100%; }
+  .pain-list { list-style:none; display:flex; flex-direction:column; gap:16px; }
+  .pain-item { display:flex; align-items:flex-start; gap:16px; padding:20px; background:rgba(255,255,255,.05); border-radius:12px; border-left:3px solid #c0392b; }
+  .pain-icon { font-size:1.3rem; flex-shrink:0; margin-top:2px; }
+  .pain-text { font-size:.9rem; color:rgba(255,255,255,.75); line-height:1.6; }
+  .pain-text strong { color:white; display:block; margin-bottom:4px; }
+
+  /* FEATURES */
+  .features { background:var(--cream); }
+  .features-header { text-align:center; max-width:600px; margin:0 auto 70px; }
+  .features-header .section-sub { margin:0 auto; }
+  .features-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+  .feature-card { background:white; border-radius:20px; padding:36px 32px; border:1px solid rgba(0,0,0,.06); transition:transform .2s,box-shadow .2s; position:relative; overflow:hidden; }
+  .feature-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--teal),var(--teal-light)); opacity:0; transition:opacity .2s; }
+  .feature-card:hover { transform:translateY(-4px); box-shadow:0 20px 40px rgba(0,0,0,.08); }
+  .feature-card:hover::before { opacity:1; }
+  .feature-icon { width:52px; height:52px; background:var(--teal-pale); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; margin-bottom:20px; }
+  .feature-title { font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:700; color:var(--ink); margin-bottom:10px; }
+  .feature-desc { font-size:.875rem; color:var(--ink-soft); line-height:1.7; }
+  .feature-card.highlight { background:var(--teal); border-color:transparent; }
+  .feature-card.highlight .feature-icon { background:rgba(255,255,255,.15); }
+  .feature-card.highlight .feature-title { color:white; }
+  .feature-card.highlight .feature-desc { color:rgba(255,255,255,.75); }
+  .feature-card.highlight::before { opacity:1; background:var(--gold); }
+
+  /* HOW */
+  .how { background:white; }
+  .how-inner { display:grid; grid-template-columns:1fr 1fr; gap:100px; align-items:center; }
+  .steps { display:flex; flex-direction:column; }
+  .step { display:flex; gap:24px; position:relative; padding-bottom:36px; }
+  .step:last-child { padding-bottom:0; }
+  .step-line { display:flex; flex-direction:column; align-items:center; flex-shrink:0; }
+  .step-num { width:40px; height:40px; border-radius:50%; background:var(--teal); color:white; font-weight:700; font-size:.875rem; display:flex; align-items:center; justify-content:center; }
+  .step-connector { width:2px; flex:1; background:linear-gradient(to bottom,var(--teal),rgba(10,124,110,.1)); margin-top:8px; }
+  .step:last-child .step-connector { display:none; }
+  .step-content { padding-top:8px; }
+  .step-title { font-weight:600; color:var(--ink); margin-bottom:6px; }
+  .step-desc { font-size:.875rem; color:var(--ink-muted); line-height:1.6; }
+  .clinic-cards { display:flex; flex-direction:column; gap:16px; }
+  .clinic-card { background:var(--cream); border-radius:16px; padding:24px; display:flex; align-items:center; gap:20px; border:1px solid rgba(0,0,0,.06); }
+  .clinic-avatar { width:48px; height:48px; background:var(--teal); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.3rem; flex-shrink:0; }
+  .clinic-info { flex:1; }
+  .clinic-name { font-weight:600; color:var(--ink); margin-bottom:4px; font-size:.9rem; }
+  .clinic-meta { font-size:.78rem; color:var(--ink-muted); }
+  .clinic-stat { text-align:right; }
+  .clinic-amount { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:var(--teal); }
+  .clinic-label { font-size:.7rem; color:var(--ink-muted); text-transform:uppercase; letter-spacing:.05em; }
+
+  /* PRICING */
+  .pricing { background:var(--cream); text-align:center; }
+  .pricing-header { max-width:540px; margin:0 auto 60px; }
+  .pricing-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; max-width:960px; margin:0 auto; }
+  .plan { background:white; border-radius:24px; padding:40px 32px; border:1.5px solid rgba(0,0,0,.06); position:relative; transition:transform .2s; }
+  .plan:hover { transform:translateY(-4px); }
+  .plan.featured { background:var(--teal); border-color:transparent; transform:scale(1.04); }
+  .plan.featured:hover { transform:scale(1.04) translateY(-4px); }
+  .plan-badge { position:absolute; top:-14px; left:50%; transform:translateX(-50%); background:var(--gold); color:var(--ink); font-size:.7rem; font-weight:700; padding:5px 16px; border-radius:20px; letter-spacing:.08em; text-transform:uppercase; white-space:nowrap; }
+  .plan-name { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:var(--ink); margin-bottom:8px; }
+  .plan.featured .plan-name { color:white; }
+  .plan-price { font-family:'Playfair Display',serif; font-size:2.8rem; font-weight:900; color:var(--teal); line-height:1; margin-bottom:4px; }
+  .plan.featured .plan-price { color:var(--gold); }
+  .plan-period { font-size:.8rem; color:var(--ink-muted); margin-bottom:28px; }
+  .plan.featured .plan-period { color:rgba(255,255,255,.6); }
+  .plan-features { list-style:none; text-align:left; display:flex; flex-direction:column; gap:10px; margin-bottom:32px; }
+  .plan-feature { font-size:.875rem; color:var(--ink-soft); display:flex; align-items:flex-start; gap:10px; }
+  .plan.featured .plan-feature { color:rgba(255,255,255,.8); }
+  .plan-feature::before { content:'✓'; color:var(--teal); font-weight:700; flex-shrink:0; }
+  .plan.featured .plan-feature::before { color:var(--gold); }
+  .plan-cta { display:block; width:100%; padding:14px; border-radius:50px; font-weight:600; font-size:.875rem; text-align:center; cursor:pointer; border:1.5px solid var(--teal); color:var(--teal); background:transparent; text-decoration:none; transition:all .2s; }
+  .plan-cta:hover { background:var(--teal); color:white; }
+  .plan.featured .plan-cta { background:var(--gold); border-color:var(--gold); color:var(--ink); }
+  .plan.featured .plan-cta:hover { background:white; border-color:white; }
+
+  /* FOOTER CTA */
+  .footer-cta { background:var(--ink); text-align:center; padding:100px 80px; position:relative; overflow:hidden; }
+  .footer-cta::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 80% at 50% 100%,rgba(10,124,110,.25) 0%,transparent 70%); }
+  .footer-cta-inner { position:relative; z-index:1; }
+  .footer-title { font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3.5rem); font-weight:900; color:white; margin-bottom:20px; line-height:1.1; }
+  .footer-title em { color:var(--gold); font-style:italic; }
+  .footer-sub { font-size:1rem; color:rgba(255,255,255,.6); margin-bottom:48px; max-width:480px; margin-left:auto; margin-right:auto; line-height:1.7; }
+  .contact-info { display:flex; justify-content:center; gap:40px; flex-wrap:wrap; margin-top:60px; padding-top:40px; border-top:1px solid rgba(255,255,255,.1); }
+  .contact-item { text-align:center; }
+  .contact-label { font-size:.7rem; text-transform:uppercase; letter-spacing:.1em; color:rgba(255,255,255,.4); margin-bottom:6px; }
+  .contact-value { font-size:.9rem; color:rgba(255,255,255,.8); font-weight:500; }
+  .contact-value a { color:rgba(255,255,255,.8); text-decoration:none; }
+  .contact-value a:hover { color:var(--gold); }
+  .footer-bottom { display:flex; justify-content:space-between; align-items:center; padding:24px 80px; background:rgba(0,0,0,.3); font-size:.8rem; color:rgba(255,255,255,.35); }
+
+  /* RESPONSIVE */
+  @media(max-width:900px){
+    .hero{grid-template-columns:1fr;} .hero-right{display:none;} .hero-left{padding:60px 32px;}
+    .problem{grid-template-columns:1fr;gap:40px;padding:60px 32px;}
+    .features{padding:60px 32px;} .features-grid{grid-template-columns:1fr;}
+    .how{padding:60px 32px;} .how-inner{grid-template-columns:1fr;gap:48px;}
+    .pricing{padding:60px 32px;} .pricing-grid{grid-template-columns:1fr;max-width:400px;}
+    .plan.featured{transform:none;}
+    .footer-cta{padding:60px 32px;}
+    .footer-bottom{padding:24px 32px;flex-direction:column;gap:8px;text-align:center;}
+    section{padding:60px 32px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="logo-mark">
+      <div class="logo-icon">🦷</div>
+      <span class="logo-name">DentaFlow</span>
+    </div>
+    <p class="hero-eyebrow">Software de Gestión Dental</p>
+    <h1 class="hero-title">Tu clínica.<br><em>Bajo control.</em><br>Siempre.</h1>
+    <p class="hero-sub">Gestiona pacientes, expedientes clínicos y flujo de caja en una sola plataforma. Diseñado para clínicas dentales en Centroamérica.</p>
+    <div class="cta-group">
+      <a href="#contacto" class="btn-primary">Solicitar demo</a>
+      <a href="#features" class="btn-ghost">Ver funciones</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-mockup">
+      <div class="mockup-header">
+        <span class="mockup-title">Resumen del día</span>
+        <span class="mockup-badge">● En vivo</span>
+      </div>
+      <div class="stat-grid">
+        <div class="stat-card"><div class="stat-label">Ingresos hoy</div><div class="stat-value green">L 4,800</div></div>
+        <div class="stat-card"><div class="stat-label">Pacientes</div><div class="stat-value">8</div></div>
+        <div class="stat-card"><div class="stat-label">Balance</div><div class="stat-value gold">L 4,200</div></div>
+        <div class="stat-card"><div class="stat-label">Egresos</div><div class="stat-value" style="color:rgba(255,255,255,.6)">L 600</div></div>
+      </div>
+      <div class="bar-chart">
+        <div class="bar-label">Ingresos — últimos 7 días</div>
+        <div class="bars">
+          <div class="bar" style="height:40%"></div>
+          <div class="bar" style="height:65%"></div>
+          <div class="bar" style="height:50%"></div>
+          <div class="bar" style="height:80%"></div>
+          <div class="bar gold" style="height:55%"></div>
+          <div class="bar" style="height:90%"></div>
+          <div class="bar active" style="height:100%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div>
+    <p class="section-eyebrow" style="color:rgba(200,168,75,.8)">El problema</p>
+    <h2 class="section-title">¿Sigues llevando todo en hojas de papel y cuadernos?</h2>
+    <p class="section-sub">La mayoría de clínicas dentales en Honduras pierden ingresos, pacientes y tiempo por no tener un sistema moderno. DentaFlow lo cambia todo.</p>
+  </div>
+  <ul class="pain-list">
+    <li class="pain-item">
+      <span class="pain-icon">📋</span>
+      <div class="pain-text"><strong>Expedientes perdidos o incompletos</strong>Sin historial clínico organizado, cada visita empieza desde cero. Riesgo legal y mala experiencia para el paciente.</div>
+    </li>
+    <li class="pain-item">
+      <span class="pain-icon">💸</span>
+      <div class="pain-text"><strong>Sin control del flujo de caja</strong>No sabes exactamente cuánto entra y sale cada día. No puedes comparar entre sucursales ni ver tendencias.</div>
+    </li>
+    <li class="pain-item">
+      <span class="pain-icon">📍</span>
+      <div class="pain-text"><strong>Imposible monitorear remotamente</strong>Si tienes más de una clínica, necesitas estar físicamente presente para saber qué está pasando.</div>
+    </li>
+  </ul>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="features-header">
+    <p class="section-eyebrow">Funcionalidades</p>
+    <h2 class="section-title">Todo lo que necesitas en un solo lugar</h2>
+    <p class="section-sub">DentaFlow combina gestión clínica y control financiero en una plataforma simple, segura y accesible desde cualquier dispositivo con internet.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🦷</div>
+      <h3 class="feature-title">Expedientes Clínicos</h3>
+      <p class="feature-desc">Historia clínica completa con antecedentes médicos, cuestionario estructurado y firma digital del paciente. Todo guardado de forma segura en la nube.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📋</div>
+      <h3 class="feature-title">Registro de Visitas</h3>
+      <p class="feature-desc">Historial de cada visita por paciente — fecha, odontólogo, motivo, notas y documentos adjuntos accesibles en cualquier momento.</p>
+    </div>
+    <div class="feature-card highlight">
+      <div class="feature-icon">💰</div>
+      <h3 class="feature-title">Control de Ingresos y Egresos</h3>
+      <p class="feature-desc">Registra cada servicio con forma de pago, genera resúmenes diarios y consolida el día con un clic. Sincronización automática en tiempo real.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3 class="feature-title">KPIs en Tiempo Real</h3>
+      <p class="feature-desc">Pacientes atendidos, ingresos totales, egresos y balance del día siempre visibles en el panel principal. Sin necesidad de calcular manualmente.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🏥</div>
+      <h3 class="feature-title">Multi-Clínica</h3>
+      <p class="feature-desc">Gestiona dos o más sucursales desde una sola cuenta. Cada clínica tiene sus propios datos, usuarios y reportes independientes.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔒</div>
+      <h3 class="feature-title">Roles y Permisos</h3>
+      <p class="feature-desc">Admin con acceso completo y KPIs. Staff con acceso operativo. Sin riesgo de modificaciones no autorizadas ni fuga de información.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🌐</div>
+      <h3 class="feature-title">Acceso Remoto</h3>
+      <p class="feature-desc">Monitorea tu clínica desde cualquier lugar, en cualquier dispositivo. Solo necesitas internet — sin instalaciones, sin mantenimiento.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">☁️</div>
+      <h3 class="feature-title">Almacenamiento en la Nube</h3>
+      <p class="feature-desc">Todos los documentos, firmas y expedientes se respaldan automáticamente en la nube. Nunca pierdas un expediente por fallo de equipo.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔍</div>
+      <h3 class="feature-title">Búsqueda Instantánea</h3>
+      <p class="feature-desc">Encuentra cualquier paciente en segundos por nombre, número de identidad o teléfono. Sin esperas, sin errores.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="how-inner">
+    <div>
+      <p class="section-eyebrow">Cómo funciona</p>
+      <h2 class="section-title">Listo en menos de un día</h2>
+      <p class="section-sub" style="margin-bottom:48px">Sin instalaciones complicadas. Sin servidores que mantener. Accede desde el navegador de tu computadora o celular y empieza.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-line"><div class="step-num">1</div><div class="step-connector"></div></div>
+          <div class="step-content">
+            <p class="step-title">Configuramos tu cuenta</p>
+            <p class="step-desc">Creamos tu clínica, tus usuarios y catálogo de servicios. El mismo día que contactas.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-line"><div class="step-num">2</div><div class="step-connector"></div></div>
+          <div class="step-content">
+            <p class="step-title">Tu equipo accede desde el navegador</p>
+            <p class="step-desc">Cualquier dispositivo con internet. Sin descargas. Sin instalaciones. Funciona en celular y computadora.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-line"><div class="step-num">3</div><div class="step-connector"></div></div>
+          <div class="step-content">
+            <p class="step-title">Registra pacientes e ingresos</p>
+            <p class="step-desc">El sistema guarda todo automáticamente en la nube. Seguro, respaldado y disponible siempre.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-line"><div class="step-num">4</div></div>
+          <div class="step-content">
+            <p class="step-title">Monitorea desde donde estés</p>
+            <p class="step-desc">Ve los KPIs de todas tus clínicas en tiempo real desde tu teléfono, estés donde estés.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clinic-cards">
+      <p style="font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:8px;">Vista multi-clínica</p>
+      <div class="clinic-card">
+        <div class="clinic-avatar">🏥</div>
+        <div class="clinic-info"><div class="clinic-name">Clínica Central</div><div class="clinic-meta">8 pacientes hoy · 3 usuarios</div></div>
+        <div class="clinic-stat"><div class="clinic-amount">L 4,800</div><div class="clinic-label">Hoy</div></div>
+      </div>
+      <div class="clinic-card">
+        <div class="clinic-avatar">🦷</div>
+        <div class="clinic-info"><div class="clinic-name">Sucursal Norte</div><div class="clinic-meta">5 pacientes hoy · 2 usuarios</div></div>
+        <div class="clinic-stat"><div class="clinic-amount">L 2,950</div><div class="clinic-label">Hoy</div></div>
+      </div>
+      <div class="clinic-card">
+        <div class="clinic-avatar">📍</div>
+        <div class="clinic-info"><div class="clinic-name">Sucursal Sur</div><div class="clinic-meta">6 pacientes hoy · 2 usuarios</div></div>
+        <div class="clinic-stat"><div class="clinic-amount">L 3,600</div><div class="clinic-label">Hoy</div></div>
+      </div>
+      <div class="clinic-card" style="background:var(--teal);border-color:transparent;">
+        <div class="clinic-avatar" style="background:rgba(255,255,255,.15);">📊</div>
+        <div class="clinic-info"><div class="clinic-name" style="color:white;">Total del día</div><div class="clinic-meta" style="color:rgba(255,255,255,.6);">Todas las clínicas</div></div>
+        <div class="clinic-stat"><div class="clinic-amount" style="color:var(--gold);">L 11,350</div><div class="clinic-label" style="color:rgba(255,255,255,.5);">Consolidado</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing">
+  <div class="pricing-header">
+    <p class="section-eyebrow">Planes</p>
+    <h2 class="section-title">Precios simples y transparentes</h2>
+    <p class="section-sub" style="margin:0 auto">Sin contratos largos. Sin sorpresas. Cancela cuando quieras.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="plan">
+      <div class="plan-name">Básico</div>
+      <div class="plan-price">$39</div>
+      <div class="plan-period">por mes / por clínica</div>
+      <ul class="plan-features">
+        <li class="plan-feature">1 clínica</li>
+        <li class="plan-feature">Hasta 3 usuarios</li>
+        <li class="plan-feature">Expedientes de pacientes</li>
+        <li class="plan-feature">Control de ingresos y egresos</li>
+        <li class="plan-feature">Respaldo automático en la nube</li>
+        <li class="plan-feature">Soporte por correo</li>
+      </ul>
+      <a href="#contacto" class="plan-cta">Empezar</a>
+    </div>
+    <div class="plan featured">
+      <div class="plan-badge">Más popular</div>
+      <div class="plan-name">Profesional</div>
+      <div class="plan-price">$69</div>
+      <div class="plan-period">por mes / hasta 3 clínicas</div>
+      <ul class="plan-features">
+        <li class="plan-feature">Hasta 3 clínicas</li>
+        <li class="plan-feature">Usuarios ilimitados</li>
+        <li class="plan-feature">Todo lo del plan Básico</li>
+        <li class="plan-feature">Panel multi-clínica</li>
+        <li class="plan-feature">Roles y permisos avanzados</li>
+        <li class="plan-feature">Soporte prioritario WhatsApp</li>
+      </ul>
+      <a href="#contacto" class="plan-cta">Empezar</a>
+    </div>
+    <div class="plan">
+      <div class="plan-name">Empresarial</div>
+      <div class="plan-price">$129</div>
+      <div class="plan-period">por mes / clínicas ilimitadas</div>
+      <ul class="plan-features">
+        <li class="plan-feature">Clínicas ilimitadas</li>
+        <li class="plan-feature">Usuarios ilimitados</li>
+        <li class="plan-feature">Todo lo del plan Pro</li>
+        <li class="plan-feature">Reportes personalizados</li>
+        <li class="plan-feature">Capacitación incluida</li>
+        <li class="plan-feature">Soporte dedicado</li>
+      </ul>
+      <a href="#contacto" class="plan-cta">Contactar</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER CTA -->
+<section class="footer-cta" id="contacto">
+  <div class="footer-cta-inner">
+    <h2 class="footer-title">¿Listo para <em>modernizar</em><br>tu clínica?</h2>
+    <p class="footer-sub">Solicita una demo gratuita. Te mostramos el sistema funcionando en tu clínica en menos de 30 minutos.</p>
+    <a href="mailto:hola@dentaflow.health" class="btn-primary" style="font-size:1rem;padding:18px 48px;">Solicitar demo gratis</a>
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-label">Correo</div>
+        <div class="contact-value"><a href="mailto:hola@dentaflow.health">hola@dentaflow.health</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">WhatsApp</div>
+        <div class="contact-value"><a href="https://wa.me/12027131216" target="_blank">+1 (202) 713-1216</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Disponibilidad</div>
+        <div class="contact-value">Honduras · Centroamérica</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="footer-bottom">
+  <span>© 2026 DentaFlow. Todos los derechos reservados.</span>
+  <span>Hecho en Honduras 🇭🇳</span>
+</div>
+
+</body>
+</html>
