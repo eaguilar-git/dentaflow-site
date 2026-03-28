@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DentaFlow — Software de Gestión para Clínicas Dentales</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='200' height='200' fill='%230d2b22'/%3E%3Cpolygon points='200,0 200,200 0,200' fill='%231a9e8a'/%3E%3Crect x='79' y='55' width='20' height='40' rx='5' fill='white'/%3E%3Crect x='101' y='55' width='20' height='40' rx='5' fill='white'/%3E%3Crect x='58' y='58' width='18' height='36' rx='5' fill='white'/%3E%3Crect x='124' y='58' width='18' height='36' rx='5' fill='white'/%3E%3Crect x='38' y='63' width='17' height='30' rx='5' fill='white'/%3E%3Crect x='145' y='63' width='17' height='30' rx='5' fill='white'/%3E%3Crect x='20' y='96' width='160' height='3' fill='%230d2b22' opacity='.78'/%3E%3Crect x='79' y='100' width='20' height='36' rx='5' fill='white'/%3E%3Crect x='101' y='100' width='20' height='36' rx='5' fill='white'/%3E%3Crect x='58' y='101' width='18' height='32' rx='5' fill='white'/%3E%3Crect x='124' y='101' width='18' height='32' rx='5' fill='white'/%3E%3Crect x='38' y='102' width='17' height='27' rx='5' fill='white'/%3E%3Crect x='145' y='102' width='17' height='27' rx='5' fill='white'/%3E%3C/svg%3E">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-STHHCBVVQ6"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -15,21 +16,23 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --teal:#0a7c6e; --teal-light:#12a391; --teal-pale:#e6f5f3;
-    --cream:#f9f6f1; --ink:#1a1a1a; --ink-soft:#444; --ink-muted:#777;
+    --teal:#1a9e8a; --teal-light:#22b8a2; --teal-pale:#e0f5f2;
+    --teal-dark:#0d2b22;
+    --cream:#f9f6f1; --ink:#0d2b22; --ink-soft:#3a4a44; --ink-muted:#6b7a75;
     --gold:#c8a84b; --white:#ffffff;
   }
   html { scroll-behavior: smooth; }
   body { font-family:'DM Sans',sans-serif; background:var(--cream); color:var(--ink); overflow-x:hidden; }
 
   /* HERO */
-  .hero { min-height:100vh; background:var(--teal); display:grid; grid-template-columns:1fr 1fr; position:relative; overflow:hidden; }
+  .hero { min-height:100vh; background:#0d2b22; display:grid; grid-template-columns:1fr 1fr; position:relative; overflow:hidden; }
   .hero::before { content:''; position:absolute; inset:0;
-    background: radial-gradient(ellipse 60% 80% at 70% 50%,rgba(18,163,145,.25) 0%,transparent 70%),
-                radial-gradient(ellipse 40% 60% at 10% 80%,rgba(0,0,0,.2) 0%,transparent 60%); }
+    background: linear-gradient(135deg, transparent 50%, rgba(26,158,138,.35) 50%),
+                radial-gradient(ellipse 50% 70% at 75% 55%,rgba(26,158,138,.2) 0%,transparent 65%),
+                radial-gradient(ellipse 40% 60% at 10% 80%,rgba(0,0,0,.25) 0%,transparent 60%); }
   .hero-left { padding:80px 60px 80px 80px; display:flex; flex-direction:column; justify-content:center; position:relative; z-index:2; }
   .logo-mark { display:flex; align-items:center; gap:12px; margin-bottom:60px; }
-  .logo-icon { width:44px; height:44px; background:var(--gold); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:20px; }
+  .logo-icon { width:44px; height:44px; border-radius:12px; overflow:hidden; flex-shrink:0; box-shadow:0 4px 12px rgba(0,0,0,0.25); }
   .logo-name { font-family:'Playfair Display',serif; font-size:1.5rem; color:white; letter-spacing:.05em; }
   .hero-eyebrow { font-size:.75rem; font-weight:600; letter-spacing:.15em; text-transform:uppercase; color:var(--gold); margin-bottom:20px; }
   .hero-title { font-family:'Playfair Display',serif; font-size:clamp(2.8rem,5vw,4.2rem); font-weight:900; color:white; line-height:1.05; margin-bottom:28px; }
@@ -63,7 +66,7 @@
   .section-sub { font-size:1rem; color:var(--ink-soft); line-height:1.7; max-width:520px; }
 
   /* PROBLEM */
-  .problem { background:var(--ink); color:white; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+  .problem { background:#0d2b22; color:white; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
   .problem .section-title { color:white; }
   .problem .section-sub { color:rgba(255,255,255,.6); max-width:100%; }
   .pain-list { list-style:none; display:flex; flex-direction:column; gap:16px; }
@@ -145,7 +148,7 @@
   .pricing-note-text strong { color:var(--ink); }
 
   /* FOOTER CTA */
-  .footer-cta { background:var(--ink); text-align:center; padding:100px 80px; position:relative; overflow:hidden; }
+  .footer-cta { background:#0d2b22; text-align:center; padding:100px 80px; position:relative; overflow:hidden; }
   .footer-cta::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 80% at 50% 100%,rgba(10,124,110,.25) 0%,transparent 70%); }
   .footer-cta-inner { position:relative; z-index:1; }
   .footer-title { font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3.5rem); font-weight:900; color:white; margin-bottom:20px; line-height:1.1; }
@@ -157,7 +160,7 @@
   .contact-value { font-size:.9rem; color:rgba(255,255,255,.8); font-weight:500; }
   .contact-value a { color:rgba(255,255,255,.8); text-decoration:none; }
   .contact-value a:hover { color:var(--gold); }
-  .footer-bottom { display:flex; justify-content:space-between; align-items:center; padding:24px 80px; background:rgba(0,0,0,.3); font-size:.8rem; color:rgba(255,255,255,.35); }
+  .footer-bottom { display:flex; justify-content:space-between; align-items:center; padding:24px 80px; background:#071a13; font-size:.8rem; color:rgba(255,255,255,.35); }
 
   /* ROI SECTION */
   .roi-section { background:var(--cream); padding:100px 80px; }
@@ -173,7 +176,7 @@
   .roi-card.featured .roi-label { color:white; }
   .roi-desc { font-size:.8rem; color:var(--ink-muted); line-height:1.6; }
   .roi-card.featured .roi-desc { color:rgba(255,255,255,.75); }
-  .roi-cta-box { background:var(--ink); border-radius:20px; padding:40px 48px; display:grid; grid-template-columns:1fr auto; gap:32px; align-items:center; }
+  .roi-cta-box { background:#0d2b22; border-radius:20px; padding:40px 48px; display:grid; grid-template-columns:1fr auto; gap:32px; align-items:center; }
   .roi-cta-label { font-size:.75rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
   .roi-cta-text { font-family:'Playfair Display',serif; font-size:1.35rem; font-weight:700; color:white; line-height:1.4; }
   .roi-cta-text em { color:var(--gold); }
@@ -208,7 +211,25 @@
 <section class="hero">
   <div class="hero-left">
     <div class="logo-mark">
-      <div class="logo-icon">🦷</div>
+      <div class="logo-icon">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:100%;">
+          <rect width="200" height="200" fill="#0d2b22"/>
+          <polygon points="200,0 200,200 0,200" fill="#1a9e8a"/>
+          <rect x="79" y="55" width="20" height="40" rx="5" fill="white"/>
+          <rect x="101" y="55" width="20" height="40" rx="5" fill="white"/>
+          <rect x="58" y="58" width="18" height="36" rx="5" fill="white"/>
+          <rect x="124" y="58" width="18" height="36" rx="5" fill="white"/>
+          <rect x="38" y="63" width="17" height="30" rx="5" fill="white"/>
+          <rect x="145" y="63" width="17" height="30" rx="5" fill="white"/>
+          <rect x="20" y="96" width="160" height="3" fill="#0d2b22" opacity="0.78"/>
+          <rect x="79" y="100" width="20" height="36" rx="5" fill="white"/>
+          <rect x="101" y="100" width="20" height="36" rx="5" fill="white"/>
+          <rect x="58" y="101" width="18" height="32" rx="5" fill="white"/>
+          <rect x="124" y="101" width="18" height="32" rx="5" fill="white"/>
+          <rect x="38" y="102" width="17" height="27" rx="5" fill="white"/>
+          <rect x="145" y="102" width="17" height="27" rx="5" fill="white"/>
+        </svg>
+      </div>
       <span class="logo-name">DentaFlow</span>
     </div>
     <p class="hero-eyebrow">Software de Gestión Dental</p>
