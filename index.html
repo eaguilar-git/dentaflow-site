@@ -113,7 +113,7 @@
   .clinic-amount { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:var(--teal); }
   .clinic-label { font-size:.7rem; color:var(--ink-muted); text-transform:uppercase; letter-spacing:.05em; }
 
-  /* PRICING — A TU MEDIDA */
+  /* PRICING */
   .pricing { background:var(--cream); text-align:center; }
   .pricing-header { max-width:600px; margin:0 auto 60px; }
   .pricing-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; max-width:960px; margin:0 auto 40px; }
@@ -124,22 +124,12 @@
   .plan-badge { position:absolute; top:-14px; left:50%; transform:translateX(-50%); background:var(--gold); color:var(--ink); font-size:.7rem; font-weight:700; padding:5px 16px; border-radius:20px; letter-spacing:.08em; text-transform:uppercase; white-space:nowrap; }
   .plan-name { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:var(--ink); margin-bottom:16px; }
   .plan.featured .plan-name { color:white; }
-
-  /* "A tu medida" tag replacing price */
-  .plan-price-tag {
-    display:inline-flex; align-items:center; gap:8px;
-    background:var(--teal-pale); border-radius:50px;
-    padding:8px 20px; margin-bottom:28px;
-  }
+  .plan-price-tag { display:inline-flex; align-items:center; gap:8px; background:var(--teal-pale); border-radius:50px; padding:8px 20px; margin-bottom:28px; }
   .plan.featured .plan-price-tag { background:rgba(255,255,255,.15); }
   .plan-price-icon { font-size:.85rem; color:var(--teal); }
   .plan.featured .plan-price-icon { color:var(--gold); }
-  .plan-price-label {
-    font-size:.82rem; font-weight:600; letter-spacing:.04em;
-    color:var(--teal);
-  }
+  .plan-price-label { font-size:.82rem; font-weight:600; letter-spacing:.04em; color:var(--teal); }
   .plan.featured .plan-price-label { color:var(--gold); }
-
   .plan-features { list-style:none; text-align:left; display:flex; flex-direction:column; gap:10px; margin-bottom:32px; }
   .plan-feature { font-size:.875rem; color:var(--ink-soft); display:flex; align-items:flex-start; gap:10px; }
   .plan.featured .plan-feature { color:rgba(255,255,255,.8); }
@@ -149,14 +139,7 @@
   .plan-cta:hover { background:var(--teal); color:white; }
   .plan.featured .plan-cta { background:var(--gold); border-color:var(--gold); color:var(--ink); }
   .plan.featured .plan-cta:hover { background:white; border-color:white; }
-
-  /* Pricing footer note */
-  .pricing-note {
-    max-width:580px; margin:0 auto;
-    background:white; border-radius:16px; padding:24px 32px;
-    border:1px solid rgba(0,0,0,.06);
-    display:flex; align-items:center; gap:16px; text-align:left;
-  }
+  .pricing-note { max-width:580px; margin:0 auto; background:white; border-radius:16px; padding:24px 32px; border:1px solid rgba(0,0,0,.06); display:flex; align-items:center; gap:16px; text-align:left; }
   .pricing-note-icon { font-size:1.5rem; flex-shrink:0; }
   .pricing-note-text { font-size:.875rem; color:var(--ink-soft); line-height:1.6; }
   .pricing-note-text strong { color:var(--ink); }
@@ -230,7 +213,7 @@
     </div>
     <p class="hero-eyebrow">Software de Gestión Dental</p>
     <h1 class="hero-title">Tu clínica.<br><em>Bajo control.</em><br>Siempre.</h1>
-    <p class="hero-sub">Expedientes, finanzas, citas y especialistas en una sola plataforma. Sin papeles, sin hojas de cálculo. Diseñado para clínicas dentales en Centroamérica.</p>
+    <p class="hero-sub">Expedientes, finanzas, especialistas y agendamiento automático por WhatsApp — todo en una plataforma. Sin papeles, sin hojas de cálculo. Diseñado para clínicas dentales en Centroamérica.</p>
     <div class="cta-group">
       <a href="https://wa.me/12027131216?text=Hola%2C%20me%20interesa%20una%20demo%20de%20DentaFlow%20para%20mi%20cl%C3%ADnica." target="_blank" class="btn-primary">💬 Solicitar demo</a>
       <a href="#features" class="btn-ghost">Ver funciones</a>
@@ -292,10 +275,10 @@
         <div class="roi-desc">Ve en tiempo real cuánto generó cada odontólogo. Sin esperar reportes al final del día.</div>
       </div>
       <div class="roi-card">
-        <div class="roi-icon">📈</div>
-        <div class="roi-number">+</div>
-        <div class="roi-label">retención de pacientes</div>
-        <div class="roi-desc">Identifica tus meses más ocupados, los servicios más demandados y actúa con datos reales.</div>
+        <div class="roi-icon">💬</div>
+        <div class="roi-number">0</div>
+        <div class="roi-label">llamadas para agendar</div>
+        <div class="roi-desc">El paciente recibe un enlace por WhatsApp y elige su cita solo, desde su celular.</div>
       </div>
     </div>
     <div class="roi-cta-box">
@@ -373,8 +356,13 @@
     </div>
     <div class="feature-card">
       <div class="feature-icon">📅</div>
-      <h3 class="feature-title">Citas y Agenda</h3>
-      <p class="feature-desc">Gestiona la agenda de citas por especialista y sucursal. Seguimiento de estado: atendido, no atendido, reprogramado. Generación automática de agenda mensual.</p>
+      <h3 class="feature-title">Agenda Completa</h3>
+      <p class="feature-desc">Dos modos en uno: agenda de especialistas por sucursal con seguimiento de estado, y agenda propia para capturar citas rápidas al instante. Vista de calendario, duración por cita y estados visuales.</p>
+    </div>
+    <div class="feature-card highlight">
+      <div class="feature-icon">💬</div>
+      <h3 class="feature-title">Agendamiento por WhatsApp</h3>
+      <p class="feature-desc">Genera un enlace único por paciente y envíalo por WhatsApp con un mensaje pre-escrito. El paciente elige su fecha y hora desde su celular — sin cuentas, sin complicaciones.</p>
     </div>
     <div class="feature-card highlight">
       <div class="feature-icon">👨‍⚕️</div>
@@ -395,11 +383,6 @@
       <div class="feature-icon">☁️</div>
       <h3 class="feature-title">Almacenamiento en la Nube</h3>
       <p class="feature-desc">Todos los documentos, firmas y expedientes se respaldan automáticamente en la nube. Nunca pierdas un expediente por fallo de equipo.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🔍</div>
-      <h3 class="feature-title">Búsqueda Instantánea</h3>
-      <p class="feature-desc">Encuentra cualquier paciente en segundos por nombre, número de identidad o teléfono. Sin esperas, sin errores.</p>
     </div>
   </div>
 </section>
@@ -468,7 +451,7 @@
   </div>
 </section>
 
-<!-- PRICING — A TU MEDIDA -->
+<!-- PRICING -->
 <section class="pricing">
   <div class="pricing-header">
     <p class="section-eyebrow">Planes</p>
@@ -509,7 +492,8 @@
         <li class="plan-feature">Control de ingresos y egresos</li>
         <li class="plan-feature">Resumen mensual y anual</li>
         <li class="plan-feature">Módulo de especialistas</li>
-        <li class="plan-feature">Módulo de citas y agenda</li>
+        <li class="plan-feature">Agenda completa + citas rápidas</li>
+        <li class="plan-feature">Agendamiento por WhatsApp</li>
       </ul>
       <a href="https://wa.me/12027131216?text=Hola%2C%20me%20interesa%20el%20plan%20Crecimiento%20de%20DentaFlow." target="_blank" class="plan-cta">Consultar precio</a>
     </div>
@@ -528,7 +512,8 @@
         <li class="plan-feature">Control de ingresos y egresos</li>
         <li class="plan-feature">Resumen mensual y anual</li>
         <li class="plan-feature">Módulo de especialistas</li>
-        <li class="plan-feature">Módulo de citas y agenda</li>
+        <li class="plan-feature">Agenda completa + citas rápidas</li>
+        <li class="plan-feature">Agendamiento por WhatsApp</li>
         <li class="plan-feature">Reportes personalizados</li>
       </ul>
       <a href="https://wa.me/12027131216?text=Hola%2C%20me%20interesa%20el%20plan%20Pro%20de%20DentaFlow." target="_blank" class="plan-cta">Consultar precio</a>
