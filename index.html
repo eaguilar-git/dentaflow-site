@@ -24,6 +24,16 @@
   html { scroll-behavior: smooth; }
   body { font-family:'DM Sans',sans-serif; background:var(--cream); color:var(--ink); overflow-x:hidden; }
 
+  /* NAV */
+  .top-nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:0 48px; height:60px; display:flex; align-items:center; justify-content:space-between; background:rgba(13,43,34,.85); backdrop-filter:blur(12px); border-bottom:1px solid rgba(255,255,255,.07); }
+  .nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .nav-logo-icon { width:28px; height:28px; border-radius:7px; overflow:hidden; flex-shrink:0; }
+  .nav-logo-name { font-family:'Playfair Display',serif; font-size:1.1rem; color:white; letter-spacing:.05em; }
+  .nav-login { background:transparent; border:1.5px solid rgba(255,255,255,.35); color:white; padding:7px 22px; border-radius:50px; font-size:.85rem; font-weight:500; text-decoration:none; letter-spacing:.02em; transition:background .2s,border-color .2s; }
+  .nav-login:hover { background:rgba(255,255,255,.1); border-color:white; }
+  .hero { margin-top:60px; }
+  @media(max-width:900px){ .top-nav { padding:0 20px; } }
+
   /* HERO */
   .hero { min-height:100vh; background:#0d2b22; display:grid; grid-template-columns:1fr 1fr; position:relative; overflow:hidden; }
   .hero::before { content:''; position:absolute; inset:0;
@@ -206,6 +216,32 @@
 </style>
 </head>
 <body>
+
+<nav class="top-nav">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:100%;">
+        <rect width="200" height="200" fill="#0d2b22"/>
+        <polygon points="200,0 200,200 0,200" fill="#1a9e8a"/>
+        <rect x="79" y="55" width="20" height="40" rx="5" fill="white"/>
+        <rect x="101" y="55" width="20" height="40" rx="5" fill="white"/>
+        <rect x="58" y="58" width="18" height="36" rx="5" fill="white"/>
+        <rect x="124" y="58" width="18" height="36" rx="5" fill="white"/>
+        <rect x="38" y="63" width="17" height="30" rx="5" fill="white"/>
+        <rect x="145" y="63" width="17" height="30" rx="5" fill="white"/>
+        <rect x="20" y="96" width="160" height="3" fill="#0d2b22" opacity="0.78"/>
+        <rect x="79" y="100" width="20" height="36" rx="5" fill="white"/>
+        <rect x="101" y="100" width="20" height="36" rx="5" fill="white"/>
+        <rect x="58" y="101" width="18" height="32" rx="5" fill="white"/>
+        <rect x="124" y="101" width="18" height="32" rx="5" fill="white"/>
+        <rect x="38" y="102" width="17" height="27" rx="5" fill="white"/>
+        <rect x="145" y="102" width="17" height="27" rx="5" fill="white"/>
+      </svg>
+    </div>
+    <span class="nav-logo-name">DentaFlow</span>
+  </a>
+  <a href="https://app.dentaflow.health" target="_blank" class="nav-login">Iniciar sesión →</a>
+</nav>
 
 <!-- HERO -->
 <section class="hero">
